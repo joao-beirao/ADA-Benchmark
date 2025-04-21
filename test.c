@@ -87,13 +87,8 @@ int main() {
             char output_file[MAX_NAME_SIZE+2];
             snprintf(output_file, sizeof(output_file), "o_%s",  test_files_names[j]);
         
-            //char input_file[MAX_NAME_SIZE];
-            //snprintf(input_file, sizeof(input_file), "test1.txt");
-            //char output_file[MAX_NAME_SIZE];
-            //snprintf(output_file, sizeof(output_file), "test1_o.txt");
-            
 
-            // --- Normalize the execution time ---
+            // --- Normalize the execution time --- (To make hardware fluctuations less impactful)
             double execution_time = 0.0;
             for (int k = 0; k < TEST_NORMALIZATION_ITERATIONS; k++)
             {
@@ -116,7 +111,13 @@ int main() {
         printf("Execution times for Test %s:\n", test_files_names[i]);
         for (int j = 0; j < num_of_folders; j++)
         {
-            printf("%s: %.3f seconds\n", zip_files_names[j], execution_times[j][i]);
+            if(execution_times[j][i] != -1 ){
+                printf("%s: %.3f seconds\n", zip_files_names[j], execution_times[j][i]);
+
+            }else{
+                printf("%s: Not Working\n");
+
+            }
 
         }
         
